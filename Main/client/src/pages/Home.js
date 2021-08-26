@@ -1,9 +1,7 @@
-import Card from "../components/Card";
 import Form from "../components/Form";
 import Book from "../components/Book";
-import Footer from "../components/Footer";
 import API from "../utils/API";
-import { Col, Row, Container } from "bootstrap-react";
+import { Jumbotron, Card, Container, Row, Col, ListGroup } from "react-bootstrap";
 import { Component } from "react";
 
 class Home extends Component {
@@ -21,6 +19,8 @@ class Home extends Component {
   };
 
   getBooks = () => {
+    console.log("Get Books")
+    console.log(this.state.q)
     API.getBooks(this.state.q)
       .then((res) =>
         this.setState({
@@ -35,14 +35,19 @@ class Home extends Component {
       );
   };
 
-  handleFormSubmit = (event) => {
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.getBooks();
+  };
+
+  handleBookSave = id => {
     const book = this.state.books.find((book) => book.id === id);
 
     API.saveBook({
       googleId: book.id,
       title: book.volumeInfo.title,
       subtitle: book.volumeInfo.subtitle,
-      link: book.volumneIngo.infoLink,
+      link: book.volumeInfo.infoLink,
       authors: book.volumeInfo.authors,
       description: book.volumeInfo.description,
       image: book.volumeInfo.imageLinks.thumbnail,
@@ -75,7 +80,7 @@ class Home extends Component {
           <Col size="md-12">
             <Card title="Results">
               {this.state.books.length ? (
-                <List>
+                <ListGroup>
                   {this.state.books.map((book) => (
                     <Book
                       key={book.id}
@@ -95,7 +100,7 @@ class Home extends Component {
                       )}
                     />
                   ))}
-                </List>
+                </ListGroup>
               ) : (
                 <h2 className="text-center">{this.state.message}</h2>
               )}
