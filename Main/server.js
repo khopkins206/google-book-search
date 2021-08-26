@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.statis("client/build"));
+  app.use(express.static("client/build"));
 }
 
 app.use(routes);
@@ -16,8 +16,8 @@ app.use(routes);
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost:27017/googe_book_search",
   {
-    useCreateIndex: true,
     useNewUrlParser: true,
+    useUnifiedTopology: true
   }
 );
 
