@@ -1,5 +1,5 @@
-import Form from "../../../components/Form";
-import Book from "../../../components/Book";
+import Form from "../components/Form";
+import Book from "../components/Book";
 import API from "../utils/API";
 import {
   Jumbotron,
