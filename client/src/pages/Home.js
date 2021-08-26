@@ -1,7 +1,14 @@
-import Form from "../components/Form";
-import Book from "../components/Book";
+import Form from "../../../components/Form";
+import Book from "../../../components/Book";
 import API from "../utils/API";
-import { Jumbotron, Card, Container, Row, Col, ListGroup } from "react-bootstrap";
+import {
+  Jumbotron,
+  Card,
+  Container,
+  Row,
+  Col,
+  ListGroup,
+} from "react-bootstrap";
 import { Component } from "react";
 
 class Home extends Component {
@@ -19,8 +26,8 @@ class Home extends Component {
   };
 
   getBooks = () => {
-    console.log("Get Books")
-    console.log(this.state.q)
+    console.log("Get Books");
+    console.log(this.state.q);
     API.getBooks(this.state.q)
       .then((res) =>
         this.setState({
@@ -35,12 +42,12 @@ class Home extends Component {
       );
   };
 
-  handleFormSubmit = event => {
+  handleFormSubmit = (event) => {
     event.preventDefault();
     this.getBooks();
   };
 
-  handleBookSave = id => {
+  handleBookSave = (id) => {
     const book = this.state.books.find((book) => book.id === id);
 
     API.saveBook({
